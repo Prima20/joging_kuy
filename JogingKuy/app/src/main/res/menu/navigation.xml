@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/home"
+        android:title="@string/dashboard_home" />
+
+    <item
+        android:id="@+id/navigation_create_event"
+        android:icon="@drawable/create_event"
+        android:title="@string/dashboard_create_event" />
+
+    <item
+        android:id="@+id/navigation_my_event"
+        android:icon="@drawable/calendar"
+        android:title="@string/dashboard_my_event" />
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/profile"
+        android:title="@string/dashboard_profile" />
+
+</menu>

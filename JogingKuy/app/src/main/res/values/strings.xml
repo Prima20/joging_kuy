@@ -3,4 +3,8 @@
     <string name="error_taking_picture">Error taking picture</string>
     <string name="permission_message">I need permission to take pictures :(</string>
     <string name="picture_not_taken">Picture Not Taken!</string>
+    <string name="dashboard_home">Home</string>
+    <string name="dashboard_create_event">Create event</string>
+    <string name="dashboard_my_event">Home</string>
+    <string name="dashboard_profile">Profile</string>
 </resources>
