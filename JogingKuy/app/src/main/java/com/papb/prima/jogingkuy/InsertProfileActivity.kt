@@ -31,6 +31,7 @@ class InsertProfileActivity: AppCompatActivity(){
 
     }
 
+
     fun takePicture(view: View){
         if(!hasPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) ||
                 !hasPermission(android.Manifest.permission.CAMERA)){
@@ -47,11 +48,13 @@ class InsertProfileActivity: AppCompatActivity(){
         }
     }
 
+    //Access permission
     private fun hasPermission(permission: String): Boolean {
         return ActivityCompat.checkSelfPermission(this,
                 permission) == PackageManager.PERMISSION_GRANTED
     }
 
+    //Request device permission
     private fun requestPermissions() {
         if(ActivityCompat.shouldShowRequestPermissionRationale(this,
                         android.Manifest.permission.WRITE_EXTERNAL_STORAGE)){
@@ -67,6 +70,7 @@ class InsertProfileActivity: AppCompatActivity(){
         }
     }
 
+    //Result permission
     override fun onRequestPermissionsResult(requestCode: Int,
                                             permissions: Array<String>, grantResults: IntArray) {
         when (requestCode) {
