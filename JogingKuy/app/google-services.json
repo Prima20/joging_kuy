@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "160290925215",
+    "firebase_url": "https://jogingkuy.firebaseio.com",
+    "project_id": "jogingkuy",
+    "storage_bucket": "jogingkuy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:160290925215:android:e06997f19529f20a",
+        "android_client_info": {
+          "package_name": "com.papb.prima.jogingkuy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "160290925215-ugto15fhh5fmf72v85oo59vs0fsqb6eg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8x5ckq8aU5Ri4wyldKpnylLLuexRo3jI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "160290925215-ugto15fhh5fmf72v85oo59vs0fsqb6eg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -3,22 +3,33 @@ package com.papb.prima.jogingkuy
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
+import com.google.firebase.FirebaseApp
+import com.google.firebase.ml.vision.FirebaseVision
+import com.google.firebase.ml.vision.common.FirebaseVisionImage
+import com.google.firebase.ml.vision.label.FirebaseVisionLabelDetectorOptions
 import com.mindorks.paracamera.Camera
 import kotlinx.android.synthetic.main.activity_insert_profile.*
 
 class InsertProfileActivity: AppCompatActivity(){
 
     private lateinit var camera: Camera
+    private lateinit var imageView: ImageView
     private val PERMISSION_REQUEST_CODE = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_insert_profile)
+
+        FirebaseApp.initializeApp(this)
+
+        imageView = findViewById(R.id.imageView)
 
         camera = Camera.Builder()
                 .resetToCorrectOrientation(true)//1
@@ -30,6 +41,48 @@ class InsertProfileActivity: AppCompatActivity(){
                 .build(this)
 
     }
+
+    private fun hasFace(items: List<String>): Boolean {
+        for (result in items) {
+            if (result.contains("Selfie", true))
+                return true
+        }
+        return false
+    }
+
+    private fun detectFaceIsCorrect(bitmap: Bitmap) {
+        //1
+        progressBar.visibility = View.VISIBLE
+        val image = FirebaseVisionImage.fromBitmap(bitmap)
+        val options = FirebaseVisionLabelDetectorOptions.Builder()
+                .setConfidenceThreshold(0.8f)
+                .build()
+        val detector = FirebaseVision.getInstance().getVisionLabelDetector(options)
+
+        //2
+        detector.detectInImage(image)
+                //3
+                .addOnSuccessListener {
+
+                    progressBar.visibility = View.VISIBLE
+
+                    if (hasFace(it.map { it.label.toString() })) {
+                        Toast.makeText(this.applicationContext, "Success",
+                                Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this.applicationContext, "Please take again",
+                                Toast.LENGTH_SHORT).show()
+                    }
+
+                }//4
+                .addOnFailureListener {
+                    progressBar.visibility = View.VISIBLE
+                    Toast.makeText(this.applicationContext, "Error",
+                            Toast.LENGTH_SHORT).show()
+
+                }
+    }
+
 
 
     fun takePicture(view: View){
@@ -99,7 +152,7 @@ class InsertProfileActivity: AppCompatActivity(){
                 val bitmap = camera.cameraBitmap
                 if (bitmap != null) {
                     imageView.setImageBitmap(bitmap)
-                    //detectDeliciousFoodOnDevice(bitmap)
+                    detectFaceIsCorrect(bitmap)
                 } else {
                     Toast.makeText(this.applicationContext, getString(R.string.picture_not_taken),
                             Toast.LENGTH_SHORT).show()
