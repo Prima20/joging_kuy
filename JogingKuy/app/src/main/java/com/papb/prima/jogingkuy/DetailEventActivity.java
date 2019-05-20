@@ -56,6 +56,4 @@ public class DetailEventActivity extends AppCompatActivity {
 //            txt_lokasi_received.setText(intent_namaevent);
             txt_deskripsi.setText(intent_deskripsievent);
     }
-
-
 }

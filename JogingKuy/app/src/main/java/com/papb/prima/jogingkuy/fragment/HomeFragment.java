@@ -39,7 +39,6 @@ public class HomeFragment extends Fragment {
     private EventAdapter eventAdapter;
 
     private BaseApiService mApiService;
-    private ProgressBar pb_load;
 
     private List<EventReadResponse> mEventList = new ArrayList<>();
     private List<Event> listEvent = new ArrayList<>();
@@ -55,8 +54,7 @@ public class HomeFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
         mApiService = APIUtils.getApiService();
-
-        pb_load = rootView.findViewById(R.id.pb_load);
+        
         rvEvent = rootView.findViewById(R.id.rv_events);
 
         rvEvent.setHasFixedSize(true);
@@ -77,8 +75,6 @@ public class HomeFragment extends Fragment {
         mApiService.getEvent().enqueue(new Callback<EventReadResponse>() {
             @Override
             public void onResponse(Call<EventReadResponse> call, Response<EventReadResponse> response) {
-                pb_load.setVisibility(View.GONE);
-
                 if (response.isSuccessful()) {
                     try {
                         int total = response.body().getEvent().size();
@@ -105,13 +101,13 @@ public class HomeFragment extends Fragment {
 
                             Toast.makeText(getActivity(), "Data tidak ditemukan", Toast.LENGTH_SHORT).show();
                         } else {
-                            rvEvent.setVisibility(View.VISIBLE);
-                        }
 
+                            rvEvent.setVisibility(View.VISIBLE);
+
+                        }
                     } catch (NullPointerException e) {
                         e.printStackTrace();
                     }
-
                 } else {
                     Toast.makeText(getActivity(), "Please try again, server is down", Toast.LENGTH_SHORT).show();
                 }
@@ -119,17 +115,15 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<EventReadResponse> call, Throwable t) {
-                pb_load.setVisibility(View.GONE);
                 Toast.makeText(getActivity(), "Please try again, server is down onfail", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
+
     @Override
     public void onResume() {
         super.onResume();
-
-        pb_load.setVisibility(View.GONE);
         readEvents();
     }
 }
