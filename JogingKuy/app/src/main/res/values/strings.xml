@@ -11,4 +11,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="join">JOIN</string>
+    <string name="alamat">Alamat</string>
+    <string name="lokasi">Lokasi</string>
+    <string name="deskripsi">Deskripsi</string>
+    <string name="diselenggarakan_oleh">Diselenggarakan oleh</string>
+    <string name="todo">TODO</string>
 </resources>

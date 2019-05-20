@@ -28,7 +28,7 @@ public class DetailEventActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detailevent);
+        setContentView(R.layout.activity_detail_event);
 
         mApiService = APIUtils.getApiService();
 
