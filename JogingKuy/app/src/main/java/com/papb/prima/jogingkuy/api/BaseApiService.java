@@ -8,6 +8,8 @@ import retrofit2.http.GET;
 public interface BaseApiService {
 
     //To get all event in recycleview
-    @GET("pfyty")
+    @GET("getAllEvent.php")
     Call<EventReadResponse> getEvent();
+
+
 }

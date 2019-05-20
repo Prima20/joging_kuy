@@ -14,9 +14,6 @@ public class Event {
     @SerializedName("deskripsi_event")
     @Expose
     private String deskripsiEvent;
-//    @SerializedName("pic_event")
-//    @Expose
-//    private int picEvent;
     @SerializedName("tanggal_event")
     @Expose
     private String tanggalEvent;
@@ -26,17 +23,14 @@ public class Event {
     @SerializedName("jam_event")
     @Expose
     private String jamEvent;
-    @SerializedName("min_event")
-    @Expose
-    private String minEvent;
-    @SerializedName("max_event")
-    @Expose
-    private String maxEvent;
 
-    public Event(String idEvent, String namaEvent, String tanggalEvent) {
+    public Event(String idEvent, String namaEvent, String tanggalEvent, String alamatEvent, String jamEvent, String deskripsiEvent) {
         this.idEvent = idEvent;
         this.namaEvent = namaEvent;
         this.tanggalEvent = tanggalEvent;
+        this.alamat = alamatEvent;
+        this.jamEvent = jamEvent;
+        this.deskripsiEvent = deskripsiEvent;
     }
 
     public String getIdEvent() {
@@ -63,14 +57,6 @@ public class Event {
         this.deskripsiEvent = deskripsiEvent;
     }
 
-//    public int getPicEvent() {
-//        return picEvent;
-//    }
-//
-//    public void setPicEvent(int picEvent) {
-//        this.picEvent = picEvent;
-//    }
-
     public String getTanggalEvent() {
         return tanggalEvent;
     }
@@ -93,22 +79,6 @@ public class Event {
 
     public void setJamEvent(String jamEvent) {
         this.jamEvent = jamEvent;
-    }
-
-    public String getMinEvent() {
-        return minEvent;
-    }
-
-    public void setMinEvent(String minEvent) {
-        this.minEvent = minEvent;
-    }
-
-    public String getMaxEvent() {
-        return maxEvent;
-    }
-
-    public void setMaxEvent(String maxEvent) {
-        this.maxEvent = maxEvent;
     }
 
 }

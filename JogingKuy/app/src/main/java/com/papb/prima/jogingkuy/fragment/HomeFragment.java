@@ -68,7 +68,7 @@ public class HomeFragment extends Fragment {
         return rootView;
     }
 
-    private void readEvents(){
+    private void readEvents() {
         rvEvent.setVisibility(View.GONE);
 
         mEventList.clear();
@@ -83,11 +83,14 @@ public class HomeFragment extends Fragment {
                     try {
                         int total = response.body().getEvent().size();
 
-                        for (int a=0; a<total; a++){
+                        for (int a = 0; a < total; a++) {
                             Event modelSeatGroup = new Event(
                                     response.body().getEvent().get(a).getIdEvent(),
                                     response.body().getEvent().get(a).getNamaEvent(),
-                                    response.body().getEvent().get(a).getTanggalEvent());
+                                    response.body().getEvent().get(a).getTanggalEvent(),
+                                    response.body().getEvent().get(a).getAlamat(),
+                                    response.body().getEvent().get(a).getJamEvent(),
+                                    response.body().getEvent().get(a).getDeskripsiEvent());
                             listEvent.add(modelSeatGroup);
                         }
 
