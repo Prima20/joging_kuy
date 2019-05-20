@@ -16,4 +16,7 @@
     <string name="deskripsi">Deskripsi</string>
     <string name="diselenggarakan_oleh">Diselenggarakan oleh</string>
     <string name="todo">TODO</string>
+    <string name="alamat_event">Alamat Event</string>
+    <string name="nama_event">Nama Event</string>
+    <string name="lokasi_event">Lokasi Event</string>
 </resources>

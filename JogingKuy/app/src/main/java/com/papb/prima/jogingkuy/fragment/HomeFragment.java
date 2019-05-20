@@ -54,7 +54,7 @@ public class HomeFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
         mApiService = APIUtils.getApiService();
-        
+
         rvEvent = rootView.findViewById(R.id.rv_events);
 
         rvEvent.setHasFixedSize(true);

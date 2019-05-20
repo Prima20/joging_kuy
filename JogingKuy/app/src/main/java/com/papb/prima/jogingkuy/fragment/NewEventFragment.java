@@ -9,17 +9,12 @@ import android.view.ViewGroup;
 
 import com.papb.prima.jogingkuy.R;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class NewEventFragment extends Fragment {
 
 
     public NewEventFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
