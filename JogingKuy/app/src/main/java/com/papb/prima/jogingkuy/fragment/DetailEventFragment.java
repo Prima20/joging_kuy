@@ -1,4 +1,4 @@
-package com.papb.prima.jogingkuy;
+package com.papb.prima.jogingkuy.fragment;
 
 
 import android.os.Bundle;
@@ -7,14 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.papb.prima.jogingkuy.R;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NewEventFragment extends Fragment {
+public class DetailEventFragment extends Fragment {
 
 
-    public NewEventFragment() {
+    public DetailEventFragment() {
         // Required empty public constructor
     }
 
@@ -23,7 +24,7 @@ public class NewEventFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_new_event, container, false);
+        return inflater.inflate(R.layout.fragment_detail_event, container, false);
     }
 
 }

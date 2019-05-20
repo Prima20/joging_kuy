@@ -1,4 +1,4 @@
-package com.papb.prima.jogingkuy;
+package com.papb.prima.jogingkuy.fragment;
 
 
 import android.os.Bundle;
@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.papb.prima.jogingkuy.R;
 import com.papb.prima.jogingkuy.adapter.EventAdapter;
 import com.papb.prima.jogingkuy.api.APIUtils;
 import com.papb.prima.jogingkuy.api.BaseApiService;
@@ -63,8 +64,6 @@ public class HomeFragment extends Fragment {
         eventAdapter = new EventAdapter(getContext(), listEvent);
         rvEvent.setItemAnimator(new DefaultItemAnimator());
         rvEvent.setAdapter(eventAdapter);
-
-        readEvents();
 
         return rootView;
     }
@@ -121,5 +120,13 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(getActivity(), "Please try again, server is down onfail", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        pb_load.setVisibility(View.GONE);
+        readEvents();
     }
 }

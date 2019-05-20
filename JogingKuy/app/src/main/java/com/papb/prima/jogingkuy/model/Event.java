@@ -14,9 +14,9 @@ public class Event {
     @SerializedName("deskripsi_event")
     @Expose
     private String deskripsiEvent;
-    @SerializedName("pic_event")
-    @Expose
-    private String picEvent;
+//    @SerializedName("pic_event")
+//    @Expose
+//    private int picEvent;
     @SerializedName("tanggal_event")
     @Expose
     private String tanggalEvent;
@@ -63,13 +63,13 @@ public class Event {
         this.deskripsiEvent = deskripsiEvent;
     }
 
-    public String getPicEvent() {
-        return picEvent;
-    }
-
-    public void setPicEvent(String picEvent) {
-        this.picEvent = picEvent;
-    }
+//    public int getPicEvent() {
+//        return picEvent;
+//    }
+//
+//    public void setPicEvent(int picEvent) {
+//        this.picEvent = picEvent;
+//    }
 
     public String getTanggalEvent() {
         return tanggalEvent;
