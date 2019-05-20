@@ -28,35 +28,54 @@
             android:id="@+id/txt_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/img_event"
-            android:layout_marginStart="26dp"
-            android:layout_marginLeft="26dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginBottom="3dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="24dp"
+            android:background="#4D000000"
+            android:drawablePadding="4dp"
+            android:elevation="2dp"
+            android:layout_marginTop="70dp"
+            android:padding="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@android:color/white"
             android:textSize="18sp"
             android:textStyle="bold"
+
             tools:text="Event Name" />
+
+        <!--<TextView-->
+            <!--android:id="@+id/txt_name"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@id/img_event"-->
+            <!--android:layout_marginStart="26dp"-->
+            <!--android:layout_marginLeft="26dp"-->
+            <!--android:layout_marginTop="6dp"-->
+            <!--android:layout_marginBottom="3dp"-->
+            <!--android:textSize="18sp"-->
+            <!--android:textStyle="bold"-->
+            <!--tools:text="Event Name" />-->
 
         <ImageView
             android:id="@+id/icon_date"
             android:layout_width="17dp"
             android:layout_height="17dp"
-            android:layout_below="@id/txt_name"
+            android:layout_below="@id/img_event"
             android:layout_marginStart="26dp"
             android:layout_marginLeft="26dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/my_event"
             android:scaleType="fitXY" />
 
         <TextView
             android:id="@+id/txt_date"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/txt_name"
+            android:layout_below="@id/img_event"
             android:layout_marginStart="10dp"
             android:layout_marginLeft="6dp"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="16dp"
             android:layout_toEndOf="@id/icon_date"
             android:layout_toRightOf="@id/img_event"
             tools:text="dd mm yy" />

@@ -3,6 +3,7 @@ package com.papb.prima.jogingkuy;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.papb.prima.jogingkuy.api.APIUtils;
@@ -15,6 +16,7 @@ public class DetailEventActivity extends AppCompatActivity {
     private TextView txt_name_event_received,
             txt_penyelenggara_received, txt_date, txt_time, txt_alamat_received,
             txt_lokasi_received, txt_deskripsi;
+    private Button btn_join_event;
 
     private String intent_action = "", intent_idevent = "",
             intent_namaevent = "",
@@ -26,10 +28,7 @@ public class DetailEventActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_event);
-
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
+        setContentView(R.layout.activity_detailevent);
 
         mApiService = APIUtils.getApiService();
 
@@ -47,6 +46,7 @@ public class DetailEventActivity extends AppCompatActivity {
         txt_alamat_received = findViewById(R.id.txt_alamat_received);
         txt_lokasi_received = findViewById(R.id.txt_lokasi_received);
         txt_deskripsi = findViewById(R.id.txt_deskripsi_received);
+        btn_join_event = findViewById(R.id.btn_join_event);
 
             txt_name_event_received.setText(intent_namaevent);
 //            txt_penyelenggara_received.setText(intent_);
