@@ -38,6 +38,7 @@ class SetWeightFragment : Fragment() {
         weightPicker.maxValue = 300
 
         weightPicker.wrapSelectorWheel = true
+        weightPicker.value = 60
 
         next.setOnClickListener(View.OnClickListener {
             val intent = Intent(view.context,InsertProfileActivity::class.java)

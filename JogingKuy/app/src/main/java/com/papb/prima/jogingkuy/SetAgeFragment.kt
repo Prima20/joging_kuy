@@ -47,7 +47,7 @@ class SetAgeFragment : Fragment() , FragmentChangeListener{
         agePicker.maxValue = 100
 
         agePicker.wrapSelectorWheel = true
-
+        agePicker.value = 16
         next.setOnClickListener(View.OnClickListener {
             val fr = SetHeightFragment()
             ReplaceFragment(fr)

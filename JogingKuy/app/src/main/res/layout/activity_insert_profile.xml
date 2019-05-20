@@ -91,14 +91,14 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/previous"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintEnd_toStartOf="@+id/btnNextInsertProfile"
         app:layout_constraintHorizontal_bias="0.03"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:layout_constraintVertical_bias="0.945" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnNextInsertProfile"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginBottom="8dp"

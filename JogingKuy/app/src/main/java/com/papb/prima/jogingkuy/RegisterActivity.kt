@@ -14,6 +14,8 @@ class RegisterActivity: AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
+
+
         buttonRegister.setOnClickListener(View.OnClickListener {
 //            if(checkPassword()){
                 val intent = Intent(applicationContext, RegisterDataActivity::class.java)
@@ -23,6 +25,12 @@ class RegisterActivity: AppCompatActivity(){
 //            }
         })
 
+    }
+
+    fun regsiter(){
+        var username = edtUsernameRegister.text.toString()
+        var email = edtEmailRegister.text.toString()
+        var password = edtPasswordRegister.text.toString()
     }
 
     fun checkPassword(): Boolean{

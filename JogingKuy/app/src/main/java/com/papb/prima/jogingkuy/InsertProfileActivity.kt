@@ -17,11 +17,13 @@ import com.google.firebase.ml.vision.label.FirebaseVisionLabelDetectorOptions
 import com.mindorks.paracamera.Camera
 import kotlinx.android.synthetic.main.activity_insert_profile.*
 
-class InsertProfileActivity: AppCompatActivity(){
+class InsertProfileActivity : AppCompatActivity() {
 
     private lateinit var camera: Camera
     private lateinit var imageView: ImageView
     private val PERMISSION_REQUEST_CODE = 1
+
+    var facePhoto: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +41,17 @@ class InsertProfileActivity: AppCompatActivity(){
                 .setImageFormat(Camera.IMAGE_JPEG)//5
                 .setCompression(75)//6
                 .build(this)
+
+
+        btnNextInsertProfile.setOnClickListener(View.OnClickListener {
+            if (facePhoto) {
+                val intent = Intent(applicationContext, MainActivity::class.java)
+                startActivity(intent)
+            } else {
+                Toast.makeText(this.applicationContext, "Please take photo",
+                        Toast.LENGTH_SHORT).show()
+            }
+        })
 
     }
 
@@ -67,6 +80,7 @@ class InsertProfileActivity: AppCompatActivity(){
                     progressBar.visibility = View.VISIBLE
 
                     if (hasFace(it.map { it.label.toString() })) {
+                        facePhoto = true
                         Toast.makeText(this.applicationContext, "Success",
                                 Toast.LENGTH_SHORT).show()
                     } else {
@@ -84,16 +98,15 @@ class InsertProfileActivity: AppCompatActivity(){
     }
 
 
-
-    fun takePicture(view: View){
-        if(!hasPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) ||
-                !hasPermission(android.Manifest.permission.CAMERA)){
+    fun takePicture(view: View) {
+        if (!hasPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) ||
+                !hasPermission(android.Manifest.permission.CAMERA)) {
 
             requestPermissions()
-        }else{
+        } else {
             try {
                 camera.takePicture()
-            }catch (e: Exception){
+            } catch (e: Exception) {
                 Toast.makeText(this.applicationContext,
                         getString(R.string.error_taking_picture),
                         Toast.LENGTH_SHORT).show()
@@ -109,16 +122,16 @@ class InsertProfileActivity: AppCompatActivity(){
 
     //Request device permission
     private fun requestPermissions() {
-        if(ActivityCompat.shouldShowRequestPermissionRationale(this,
-                        android.Manifest.permission.WRITE_EXTERNAL_STORAGE)){
-            Toast.makeText(applicationContext,R.string.permission_message,Toast.LENGTH_SHORT).show()
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                        android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            Toast.makeText(applicationContext, R.string.permission_message, Toast.LENGTH_SHORT).show()
             ActivityCompat.requestPermissions(this@InsertProfileActivity,
                     arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                            android.Manifest.permission.CAMERA),PERMISSION_REQUEST_CODE)
-        }else{
+                            android.Manifest.permission.CAMERA), PERMISSION_REQUEST_CODE)
+        } else {
             ActivityCompat.requestPermissions(this,
                     arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                            android.Manifest.permission.CAMERA),PERMISSION_REQUEST_CODE)
+                            android.Manifest.permission.CAMERA), PERMISSION_REQUEST_CODE)
             return
         }
     }

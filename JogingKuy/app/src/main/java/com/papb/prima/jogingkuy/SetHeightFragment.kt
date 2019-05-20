@@ -48,6 +48,7 @@ class SetHeightFragment : Fragment(), FragmentChangeListener {
         heightPicker.maxValue = 100
 
         heightPicker.wrapSelectorWheel = true
+        heightPicker.value = 160
 
         next.setOnClickListener(View.OnClickListener {
             val fr = SetWeightFragment()
