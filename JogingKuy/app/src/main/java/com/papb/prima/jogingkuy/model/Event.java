@@ -33,6 +33,12 @@ public class Event {
     @Expose
     private String maxEvent;
 
+    public Event(String idEvent, String namaEvent, String tanggalEvent) {
+        this.idEvent = idEvent;
+        this.namaEvent = namaEvent;
+        this.tanggalEvent = tanggalEvent;
+    }
+
     public String getIdEvent() {
         return idEvent;
     }

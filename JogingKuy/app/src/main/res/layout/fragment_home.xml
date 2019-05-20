@@ -10,4 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/item_row_event" />
+
+    <ProgressBar
+        android:visibility="gone"
+        android:id="@+id/pb_load"
+        android:layout_centerInParent="true"
+        android:layout_width="60dp"
+        android:layout_height="60dp" />
 </FrameLayout>

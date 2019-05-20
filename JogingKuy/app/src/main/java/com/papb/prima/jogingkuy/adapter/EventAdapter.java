@@ -12,26 +12,15 @@ import com.papb.prima.jogingkuy.R;
 import com.papb.prima.jogingkuy.model.Event;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventHolder> {
 
     private Context context;
-    private ArrayList<Event> events;
+    private List<Event> events;
 
-    public EventAdapter(Context context) {
+    public EventAdapter(Context context, List<Event> events) {
         this.context = context;
-        events = new ArrayList<>();
-    }
-
-    public void setContext(Context context) {
-        this.context = context;
-    }
-
-    public ArrayList<Event> getEvents() {
-        return events;
-    }
-
-    public void setEvents(ArrayList<Event> events) {
         this.events = events;
     }
 
@@ -45,13 +34,13 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventHolder>
 
     @Override
     public void onBindViewHolder(EventHolder holder, int position) {
-        holder.txtName.setText(getEvents().get(position).getNamaEvent());
-        holder.txtDate.setText(getEvents().get(position).getTanggalEvent());
+        holder.txtName.setText(events.get(position).getNamaEvent());
+        holder.txtDate.setText(events.get(position).getTanggalEvent());
     }
 
     @Override
     public int getItemCount() {
-        return getEvents().size();
+        return events.size();
     }
 
     public class EventHolder extends RecyclerView.ViewHolder {

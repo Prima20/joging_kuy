@@ -10,6 +10,10 @@ public class EventReadResponse {
     @Expose
     private List<Event> event = null;
 
+    public EventReadResponse(List<Event> event) {
+        this.event = event;
+    }
+
     public List<Event> getEvent() {
         return event;
     }
