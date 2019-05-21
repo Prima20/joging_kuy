@@ -20,10 +20,6 @@ class RegisterActivity: AppCompatActivity(){
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
 
-    companion object {
-        var registeredId = ""
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -43,8 +39,8 @@ class RegisterActivity: AppCompatActivity(){
                 var email = edtEmailRegister.text.toString()
                 var password = edtPasswordRegister.text.toString()
 
-                addDataUser(username, email, password)
-                regsiterUser(email, password)
+                regsiterUser(username, email, password)
+
             }else{
                 Toast.makeText(applicationContext, "Entry field !", Toast.LENGTH_SHORT).show()
             }
@@ -53,12 +49,8 @@ class RegisterActivity: AppCompatActivity(){
 
     }
 
-    fun addDataUser(username: String, email: String, password: String){
-        val user = User(username,email,password,"",0,0,0,"")
-        val userId = database.push().key.toString()
-
-        //For editing data user sementara karena getCurrent usernya bug
-        RegisterActivity.registeredId = userId
+    fun addDataUser(userId: String, username: String, email: String, password: String){
+        val user = User(username,email,password,"",0,0,0,"", "")
 
         database.child(userId).setValue(user).addOnCompleteListener {
             task ->
@@ -70,13 +62,15 @@ class RegisterActivity: AppCompatActivity(){
         }
     }
 
-    fun regsiterUser(email: String, password: String){
+    fun regsiterUser(username: String, email: String, password: String){
         auth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener {
                     task ->
                     if (task.isSuccessful) {
                         Log.d("Auth:","Sukses")
                         //Move activity
+                        val userId = auth.currentUser?.uid.toString()
+                        addDataUser(userId,username, email, password)
                         startActivity(Intent(applicationContext,RegisterDataActivity::class.java))
                     } else {
                         Log.d("Auth:",task.exception.toString())

@@ -11,5 +11,6 @@ data class User (
         var age: Int? = 0,
         var height: Int? = 0,
         var weight: Int? = 0,
-        var photo: String? = ""
+        var photo: String? = "",
+        var eventId: String? = ""
 )

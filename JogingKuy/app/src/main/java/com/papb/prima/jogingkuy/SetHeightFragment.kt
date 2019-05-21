@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.NumberPicker
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_set_height.*
 
@@ -24,6 +25,8 @@ private const val ARG_PARAM2 = "param2"
  *
  */
 class SetHeightFragment : Fragment(), FragmentChangeListener {
+
+    private lateinit var auth: FirebaseAuth
 
     //Implement interface
     override fun ReplaceFragment(fragment: Fragment?) {
@@ -46,6 +49,9 @@ class SetHeightFragment : Fragment(), FragmentChangeListener {
         val next = view.findViewById<ImageView>(R.id.nxtHeight)
         val heightPicker = view.findViewById<NumberPicker>(R.id.pickerHeight)
 
+        auth = FirebaseAuth.getInstance();
+        var userId = auth.currentUser?.uid.toString()
+
         heightPicker.minValue = 0
         heightPicker.maxValue = 300
 
@@ -54,7 +60,7 @@ class SetHeightFragment : Fragment(), FragmentChangeListener {
 
         var updateData = FirebaseDatabase.getInstance()
                 .getReference("USERS")
-                .child(RegisterActivity.registeredId)
+                .child(userId)
 
         next.setOnClickListener(View.OnClickListener {
             updateData.child("height").setValue(heightPicker.value).addOnCompleteListener {

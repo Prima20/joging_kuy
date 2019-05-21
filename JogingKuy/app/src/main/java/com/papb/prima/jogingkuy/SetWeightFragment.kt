@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.NumberPicker
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_set_height.*
 
@@ -25,6 +26,8 @@ private const val ARG_PARAM2 = "param2"
  */
 class SetWeightFragment : Fragment() {
 
+    private lateinit var auth: FirebaseAuth
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -36,6 +39,9 @@ class SetWeightFragment : Fragment() {
         val next = view.findViewById<ImageView>(R.id.nxtweight)
         val weightPicker = view.findViewById<NumberPicker>(R.id.pickerWeight)
 
+        auth = FirebaseAuth.getInstance();
+        var userId = auth.currentUser?.uid.toString()
+
         weightPicker.minValue = 0
         weightPicker.maxValue = 300
 
@@ -44,7 +50,7 @@ class SetWeightFragment : Fragment() {
 
         var updateData = FirebaseDatabase.getInstance()
                 .getReference("USERS")
-                .child(RegisterActivity.registeredId)
+                .child(userId)
 
         next.setOnClickListener(View.OnClickListener {
             updateData.child("weight").setValue(weightPicker.value).addOnCompleteListener {

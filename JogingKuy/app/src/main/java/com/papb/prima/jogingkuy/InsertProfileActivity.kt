@@ -15,6 +15,7 @@ import com.google.firebase.ml.vision.FirebaseVision
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
 import com.google.firebase.ml.vision.label.FirebaseVisionLabelDetectorOptions
 import com.mindorks.paracamera.Camera
+import com.papb.prima.jogingkuy.fragment.DashboardActivity
 import kotlinx.android.synthetic.main.activity_insert_profile.*
 
 class InsertProfileActivity : AppCompatActivity() {
@@ -45,8 +46,7 @@ class InsertProfileActivity : AppCompatActivity() {
 
         btnNextInsertProfile.setOnClickListener(View.OnClickListener {
             if (facePhoto) {
-                val intent = Intent(applicationContext, MainActivity::class.java)
-                startActivity(intent)
+                startActivity(Intent(applicationContext, DashboardActivity::class.java))
             } else {
                 Toast.makeText(this.applicationContext, "Please take photo",
                         Toast.LENGTH_SHORT).show()

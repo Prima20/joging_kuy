@@ -11,10 +11,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.papb.prima.jogingkuy.LoginActivity;
 import com.papb.prima.jogingkuy.R;
 
 public class DashboardActivity extends AppCompatActivity {
+
+    private FirebaseAuth auth;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -59,6 +64,10 @@ public class DashboardActivity extends AppCompatActivity {
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        auth = FirebaseAuth.getInstance();
+
+        //Toast.makeText(getApplicationContext(), auth.getCurrentUser().getEmail().toString(), Toast.LENGTH_SHORT).show();
+
         if (savedInstanceState == null) {
             navigation.setSelectedItemId(R.id.navigation_home);
         }
@@ -76,8 +85,9 @@ public class DashboardActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_logout) {
-            Intent mIntent = new Intent();
-            startActivity(mIntent);
+            auth.signOut();
+            finish();
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }

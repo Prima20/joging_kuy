@@ -1,16 +1,25 @@
 package com.papb.prima.jogingkuy.fragment;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.papb.prima.jogingkuy.R;
 import com.papb.prima.jogingkuy.fragment.DatePickerFragment;
 import com.papb.prima.jogingkuy.fragment.TimePickerFragment;
+import com.papb.prima.jogingkuy.model.Event;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -27,10 +36,17 @@ public class NewEventActivity extends AppCompatActivity implements View.OnClickL
     final String DATE_PICKER_TAG = "DatePicker";
     final String TIME_PICKER_TAG = "TimePicker";
 
+    //Firebase properties
+    private DatabaseReference database;
+
+    String namaEvent, tanggalEvent, alamatEvent, jamEvent, deskripsiEvent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_event);
+
+        database = FirebaseDatabase.getInstance().getReference("EVENT");
 
         edt_nama_event = findViewById(R.id.edt_nama_event);
         edt_deskripsi_event = findViewById(R.id.edt_deskripsi_event);
@@ -47,6 +63,7 @@ public class NewEventActivity extends AppCompatActivity implements View.OnClickL
         btn_date_event.setOnClickListener(this);
         btn_time_event.setOnClickListener(this);
         btn_set_new_event.setOnClickListener(this);
+
     }
 
 
@@ -68,8 +85,31 @@ public class NewEventActivity extends AppCompatActivity implements View.OnClickL
                 break;
             //Button untuk set event baru
             case R.id.btn_set_new_event:
+
+                namaEvent = edt_nama_event.getText().toString();
+                deskripsiEvent = edt_deskripsi_event.getText().toString();
+
+                createEvent(namaEvent,tanggalEvent,alamatEvent,jamEvent,deskripsiEvent);
                 break;
         }
+    }
+
+    //method for create event and add to firebase
+    private void createEvent(String namaEvent, String tanggalEvent, String alamatEvent, String jamEvent, String deskripsiEvent){
+        String eventId = database.push().getKey().toString();
+        Event event = new Event(eventId,namaEvent,tanggalEvent,alamatEvent,jamEvent,deskripsiEvent);
+
+        database.child(eventId).setValue(event).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Log.d("Event","Successfulyy created");
+                    Toast.makeText(getApplicationContext(),"event created",Toast.LENGTH_SHORT).show();
+                }else{
+                    Log.d("Event",task.getException().toString());
+                }
+            }
+        });
     }
 
     //=============NOTE==================
@@ -86,6 +126,7 @@ public class NewEventActivity extends AppCompatActivity implements View.OnClickL
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd",
                 Locale.getDefault());
 
+        tanggalEvent = dateFormat.format(calendar.getTime());
         tv_date_event.setText(dateFormat.format(calendar.getTime()));
     }
 
@@ -100,6 +141,7 @@ public class NewEventActivity extends AppCompatActivity implements View.OnClickL
         //"HH:mm" -> seperti 12:00
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
 
+        jamEvent = dateFormat.format(calendar.getTime());
         tv_time_event.setText(dateFormat.format(calendar.getTime()));
     }
 }

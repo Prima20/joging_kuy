@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
 
@@ -22,6 +23,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class ChooseGenderFragment : Fragment(), FragmentChangeListener{
 
+    private lateinit var auth: FirebaseAuth
 
     override fun ReplaceFragment(fragment: Fragment?) {
         val fragmentMan = fragmentManager
@@ -41,9 +43,12 @@ class ChooseGenderFragment : Fragment(), FragmentChangeListener{
         val ImgMale = view.findViewById<ImageView>(R.id.imgMale)
         val ImgFemale = view.findViewById<ImageView>(R.id.imgFemale)
 
+        auth = FirebaseAuth.getInstance();
+        var userId = auth.currentUser?.uid.toString()
+
         var updateData = FirebaseDatabase.getInstance()
                 .getReference("USERS")
-                .child(RegisterActivity.registeredId);
+                .child(userId);
 
         ImgFemale.setOnClickListener(View.OnClickListener {
             updateData.child("gender").setValue("female").addOnCompleteListener {

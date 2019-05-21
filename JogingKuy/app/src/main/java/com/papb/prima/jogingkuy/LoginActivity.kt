@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.papb.prima.jogingkuy.fragment.DashboardActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
 
@@ -19,6 +20,10 @@ class LoginActivity : AppCompatActivity() {
 
     //Firebase properties
     private lateinit var auth: FirebaseAuth
+
+    companion object {
+        var loginId = ""
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,7 +63,7 @@ class LoginActivity : AppCompatActivity() {
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
-                        startActivity(Intent(applicationContext, MainActivity::class.java))
+                        startActivity(Intent(applicationContext, DashboardActivity::class.java))
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w("Auth:", "signInWithEmail:failure", task.exception)

@@ -36,8 +36,12 @@
         <activity android:name=".MainActivity"/>
         <activity android:name=".RegisterDataActivity"/>
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".fragment.NewEventActivity"></activity>
-        <activity android:name=".DetailEventActivity" />
+        <activity android:name=".fragment.NewEventActivity"
+            android:parentActivityName=".fragment.DashboardActivity"
+            />
+        <activity android:name=".DetailEventActivity"
+            android:parentActivityName=".fragment.DashboardActivity"
+            />
         <activity android:name=".fragment.DashboardActivity"/>
     </application>
 

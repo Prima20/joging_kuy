@@ -16,6 +16,12 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.papb.prima.jogingkuy.R;
 import com.papb.prima.jogingkuy.adapter.EventAdapter;
 import com.papb.prima.jogingkuy.api.APIUtils;
@@ -44,6 +50,10 @@ public class HomeFragment extends Fragment {
     private List<EventReadResponse> mEventList = new ArrayList<>();
     private List<Event> listEvent = new ArrayList<>();
 
+    //Firebase properties
+    FirebaseDatabase database;
+    DatabaseReference ref;
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -55,6 +65,9 @@ public class HomeFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
         mApiService = APIUtils.getApiService();
+
+        database = FirebaseDatabase.getInstance();
+        ref = database.getReference("EVENT");
 
         rvEvent = rootView.findViewById(R.id.rv_events);
 
@@ -73,6 +86,26 @@ public class HomeFragment extends Fragment {
         });
 
         return rootView;
+    }
+
+    private void readEventFromFirebase(){
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot dataSnapshot1: dataSnapshot.getChildren()) {
+                    Event event = dataSnapshot1.getValue(Event.class);
+                    listEvent.add(event);
+                }
+
+                eventAdapter = new EventAdapter(getActivity(), listEvent);
+                rvEvent.setAdapter(eventAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void readEvents() {
@@ -129,10 +162,15 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        readEventFromFirebase();
+    }
 
     @Override
     public void onResume() {
         super.onResume();
-        readEvents();
+        //readEvents();
     }
 }

@@ -33,6 +33,9 @@ public class Event {
         this.deskripsiEvent = deskripsiEvent;
     }
 
+    public Event() {
+    }
+
     public String getIdEvent() {
         return idEvent;
     }
