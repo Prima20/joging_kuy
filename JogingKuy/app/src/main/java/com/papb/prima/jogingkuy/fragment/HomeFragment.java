@@ -89,6 +89,11 @@ public class HomeFragment extends Fragment {
     }
 
     private void readEventFromFirebase(){
+        rvEvent.setVisibility(View.GONE);
+
+        mEventList.clear();
+        listEvent.clear();
+
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
