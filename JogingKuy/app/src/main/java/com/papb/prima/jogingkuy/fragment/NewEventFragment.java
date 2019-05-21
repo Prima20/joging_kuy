@@ -11,7 +11,6 @@ import com.papb.prima.jogingkuy.R;
 
 public class NewEventFragment extends Fragment {
 
-
     public NewEventFragment() {
         // Required empty public constructor
     }
