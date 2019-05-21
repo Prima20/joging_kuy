@@ -3,45 +3,84 @@ package com.papb.prima.jogingkuy
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.papb.prima.jogingkuy.model.User
 import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity: AppCompatActivity(){
+
+
+    //Firebase properties
+    private lateinit var auth: FirebaseAuth
+    private lateinit var database: DatabaseReference
+
+    companion object {
+        var registeredId = ""
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
 
+        // Initialize Firebase
+        auth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance().getReference("USERS")
 
         buttonRegister.setOnClickListener(View.OnClickListener {
-//            if(checkPassword()){
-                val intent = Intent(applicationContext, RegisterDataActivity::class.java)
-                startActivity(intent)
-//            }else{
-//                Toast.makeText(applicationContext, "Cannot regsiter", Toast.LENGTH_SHORT).show()
-//            }
+
+            var fieldIsNull = edtUsernameRegister.text.toString().equals("") || edtEmailRegister.text.toString().equals("")
+            || edtPasswordRegister.text.toString().equals("") || edtConfirmPasswordRegister.text.toString().equals("")
+
+            if(!fieldIsNull){
+                var username = edtUsernameRegister.text.toString()
+                var email = edtEmailRegister.text.toString()
+                var password = edtPasswordRegister.text.toString()
+
+                addDataUser(username, email, password)
+                regsiterUser(email, password)
+            }else{
+                Toast.makeText(applicationContext, "Entry field !", Toast.LENGTH_SHORT).show()
+            }
+
         })
 
     }
 
-    fun regsiter(){
-        var username = edtUsernameRegister.text.toString()
-        var email = edtEmailRegister.text.toString()
-        var password = edtPasswordRegister.text.toString()
+    fun addDataUser(username: String, email: String, password: String){
+        val user = User(username,email,password,"",0,0,0,"")
+        val userId = database.push().key.toString()
+
+        //For editing data user sementara karena getCurrent usernya bug
+        RegisterActivity.registeredId = userId
+
+        database.child(userId).setValue(user).addOnCompleteListener {
+            task ->
+            if (task.isSuccessful) {
+                Log.d("Ref:","Sukses")
+            } else {
+                Log.d("Ref:",task.exception.toString())
+            }
+        }
     }
 
-    fun checkPassword(): Boolean{
-        var password = edtPasswordRegister.text.toString()
-        var repassword = edtConfirmPasswordRegister.text.toString()
-
-        if(password.equals(repassword) && (!password.equals(null) && !repassword.equals(null))){
-            return true;
-        }else{
-            Toast.makeText(applicationContext, "Please enter corect pasword", Toast.LENGTH_SHORT).show()
-            return false;
-        }
+    fun regsiterUser(email: String, password: String){
+        auth.createUserWithEmailAndPassword(email,password)
+                .addOnCompleteListener {
+                    task ->
+                    if (task.isSuccessful) {
+                        Log.d("Auth:","Sukses")
+                        //Move activity
+                        startActivity(Intent(applicationContext,RegisterDataActivity::class.java))
+                    } else {
+                        Log.d("Auth:",task.exception.toString())
+                    }
+                }
     }
 }

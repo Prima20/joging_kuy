@@ -33,6 +33,8 @@ dependencies {
     implementation 'com.android.support:support-v4:27.1.1'
     implementation 'com.google.firebase:firebase-core:16.0.1'
     implementation 'com.google.firebase:firebase-ml-vision:16.0.0'
+    implementation 'com.google.firebase:firebase-auth:17.0.0'
+    implementation 'com.google.firebase:firebase-database:17.0.0'
     implementation 'com.google.firebase:firebase-ml-vision-image-label-model:15.0.0'
     // retrofit, gson
     implementation 'com.google.code.gson:gson:2.6.2'
@@ -43,3 +45,4 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
 apply plugin: 'com.google.gms.google-services'
+com.google.gms.googleservices.GoogleServicesPlugin.config.disableVersionCheck = true

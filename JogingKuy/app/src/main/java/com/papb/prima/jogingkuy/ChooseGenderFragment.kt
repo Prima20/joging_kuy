@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import com.google.firebase.database.FirebaseDatabase
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -40,14 +41,36 @@ class ChooseGenderFragment : Fragment(), FragmentChangeListener{
         val ImgMale = view.findViewById<ImageView>(R.id.imgMale)
         val ImgFemale = view.findViewById<ImageView>(R.id.imgFemale)
 
+        var updateData = FirebaseDatabase.getInstance()
+                .getReference("USERS")
+                .child(RegisterActivity.registeredId);
+
         ImgFemale.setOnClickListener(View.OnClickListener {
-            val fr = SetAgeFragment()
-            ReplaceFragment(fr)
+            updateData.child("gender").setValue("female").addOnCompleteListener {
+                task ->
+                if (task.isSuccessful) {
+                    Log.d("Ref:","Sukses")
+
+                    val fr = SetAgeFragment()
+                    ReplaceFragment(fr)
+                } else {
+                    Log.d("Ref:",task.exception.toString())
+                }
+            }
         })
 
         ImgMale.setOnClickListener(View.OnClickListener {
-            val fr = SetAgeFragment()
-            ReplaceFragment(fr)
+            updateData.child("gender").setValue("male").addOnCompleteListener {
+                task ->
+                if (task.isSuccessful) {
+                    Log.d("Ref:","Sukses")
+
+                    val fr = SetAgeFragment()
+                    ReplaceFragment(fr)
+                } else {
+                    Log.d("Ref:",task.exception.toString())
+                }
+            }
         })
     }
 }

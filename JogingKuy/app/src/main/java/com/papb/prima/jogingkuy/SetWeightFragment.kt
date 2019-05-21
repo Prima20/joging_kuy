@@ -4,11 +4,13 @@ package com.papb.prima.jogingkuy
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.NumberPicker
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_set_height.*
 
 
@@ -40,9 +42,20 @@ class SetWeightFragment : Fragment() {
         weightPicker.wrapSelectorWheel = true
         weightPicker.value = 60
 
+        var updateData = FirebaseDatabase.getInstance()
+                .getReference("USERS")
+                .child(RegisterActivity.registeredId)
+
         next.setOnClickListener(View.OnClickListener {
-            val intent = Intent(view.context,InsertProfileActivity::class.java)
-            startActivity(intent)
+            updateData.child("weight").setValue(weightPicker.value).addOnCompleteListener {
+                task ->
+                if (task.isSuccessful) {
+                    Log.d("Ref:","Sukses")
+                    startActivity(Intent(view.context,InsertProfileActivity::class.java))
+                } else {
+                    Log.d("Ref:",task.exception.toString())
+                }
+            }
         })
     }
 }

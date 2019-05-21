@@ -4,11 +4,13 @@ package com.papb.prima.jogingkuy
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.NumberPicker
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_set_height.*
 
 
@@ -45,14 +47,27 @@ class SetHeightFragment : Fragment(), FragmentChangeListener {
         val heightPicker = view.findViewById<NumberPicker>(R.id.pickerHeight)
 
         heightPicker.minValue = 0
-        heightPicker.maxValue = 100
+        heightPicker.maxValue = 300
 
         heightPicker.wrapSelectorWheel = true
         heightPicker.value = 160
 
+        var updateData = FirebaseDatabase.getInstance()
+                .getReference("USERS")
+                .child(RegisterActivity.registeredId)
+
         next.setOnClickListener(View.OnClickListener {
-            val fr = SetWeightFragment()
-            ReplaceFragment(fr)
+            updateData.child("height").setValue(heightPicker.value).addOnCompleteListener {
+                task ->
+                if (task.isSuccessful) {
+                    Log.d("Ref:","Sukses")
+
+                    val fr = SetWeightFragment()
+                    ReplaceFragment(fr)
+                } else {
+                    Log.d("Ref:",task.exception.toString())
+                }
+            }
         })
     }
 }

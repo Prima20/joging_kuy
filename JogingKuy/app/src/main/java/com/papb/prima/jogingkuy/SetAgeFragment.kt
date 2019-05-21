@@ -3,11 +3,13 @@ package com.papb.prima.jogingkuy
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.NumberPicker
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_set_height.*
 
 
@@ -47,10 +49,24 @@ class SetAgeFragment : Fragment() , FragmentChangeListener{
         agePicker.maxValue = 100
 
         agePicker.wrapSelectorWheel = true
-        agePicker.value = 16
+        agePicker.value = 19
+
+        var updateData = FirebaseDatabase.getInstance()
+                .getReference("USERS")
+                .child(RegisterActivity.registeredId);
+
         next.setOnClickListener(View.OnClickListener {
-            val fr = SetHeightFragment()
-            ReplaceFragment(fr)
+            updateData.child("age").setValue(agePicker.value).addOnCompleteListener {
+                task ->
+                if (task.isSuccessful) {
+                    Log.d("Ref:","Sukses")
+
+                    val fr = SetHeightFragment()
+                    ReplaceFragment(fr)
+                } else {
+                    Log.d("Ref:",task.exception.toString())
+                }
+            }
         })
     }
 }
