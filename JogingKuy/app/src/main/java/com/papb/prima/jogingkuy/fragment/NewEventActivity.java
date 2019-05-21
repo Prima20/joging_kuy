@@ -50,6 +50,8 @@ public class NewEventActivity extends AppCompatActivity implements View.OnClickL
 
         database = FirebaseDatabase.getInstance().getReference("EVENT");
 
+        Toast.makeText(getApplicationContext(), "Isi alamat dahulu !", Toast.LENGTH_SHORT).show();
+
         edt_nama_event = findViewById(R.id.edt_nama_event);
         edt_deskripsi_event = findViewById(R.id.edt_deskripsi_event);
 
@@ -127,6 +129,7 @@ public class NewEventActivity extends AppCompatActivity implements View.OnClickL
                 if (task.isSuccessful()) {
                     Log.d("Event", "Successfulyy created");
                     Toast.makeText(getApplicationContext(), "event created", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
                 } else {
                     Log.d("Event", task.getException().toString());
                 }
