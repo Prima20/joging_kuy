@@ -1,6 +1,7 @@
 package com.papb.prima.jogingkuy.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -62,6 +63,14 @@ public class HomeFragment extends Fragment {
         eventAdapter = new EventAdapter(getContext(), listEvent);
         rvEvent.setItemAnimator(new DefaultItemAnimator());
         rvEvent.setAdapter(eventAdapter);
+
+        rootView.findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentNewEvent = new Intent(getActivity(), NewEventActivity.class);
+                startActivity(intentNewEvent);
+            }
+        });
 
         return rootView;
     }

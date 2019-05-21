@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.papb.prima.jogingkuy.R;
 
@@ -29,13 +31,7 @@ public class DashboardActivity extends AppCompatActivity {
                             .replace(R.id.container_layout, fragment, fragment.getClass().getSimpleName())
                             .commit();
                     return true;
-                case R.id.navigation_new_event:
 
-                    fragment = new NewEventFragment();
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.container_layout, fragment, fragment.getClass().getSimpleName())
-                            .commit();
-                    return true;
                 case R.id.navigation_my_event:
 
                     fragment = new MyEventFragment();

@@ -71,13 +71,6 @@
             android:layout_centerInParent="true"
             app:srcCompat="@drawable/ic_map_black_24dp" />
 
-        <!--<TextView-->
-            <!--android:layout_marginTop=""-->
-            <!--android:id="@+id/tv_lokasi_event"-->
-            <!--android:layout_below="@+id/btn_lokasi_event"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="@string/lokasi_event" />-->
     </RelativeLayout>
 
     <TextView

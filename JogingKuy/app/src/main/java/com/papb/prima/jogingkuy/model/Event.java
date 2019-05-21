@@ -80,5 +80,4 @@ public class Event {
     public void setJamEvent(String jamEvent) {
         this.jamEvent = jamEvent;
     }
-
 }
