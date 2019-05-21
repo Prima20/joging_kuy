@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.papb.prima.jogingkuy.MapsActivity;
 import com.papb.prima.jogingkuy.R;
 import com.papb.prima.jogingkuy.adapter.EventAdapter;
 import com.papb.prima.jogingkuy.api.APIUtils;
@@ -80,7 +81,7 @@ public class HomeFragment extends Fragment {
         rootView.findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentNewEvent = new Intent(getActivity(), NewEventActivity.class);
+                Intent intentNewEvent = new Intent(getActivity(), MapsActivity.class);
                 startActivity(intentNewEvent);
             }
         });
@@ -89,6 +90,11 @@ public class HomeFragment extends Fragment {
     }
 
     private void readEventFromFirebase(){
+        rvEvent.setVisibility(View.GONE);
+
+        mEventList.clear();
+        listEvent.clear();
+
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -99,6 +105,7 @@ public class HomeFragment extends Fragment {
 
                 eventAdapter = new EventAdapter(getActivity(), listEvent);
                 rvEvent.setAdapter(eventAdapter);
+                rvEvent.setVisibility(View.VISIBLE);
             }
 
             @Override

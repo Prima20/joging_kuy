@@ -1,5 +1,6 @@
 package com.papb.prima.jogingkuy.fragment;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.papb.prima.jogingkuy.MapsActivity;
 import com.papb.prima.jogingkuy.R;
 import com.papb.prima.jogingkuy.fragment.DatePickerFragment;
 import com.papb.prima.jogingkuy.fragment.TimePickerFragment;
@@ -29,7 +31,7 @@ public class NewEventActivity extends AppCompatActivity implements View.OnClickL
         TimePickerFragment.DialogTimeListener {
 
     EditText edt_nama_event, edt_deskripsi_event;
-    ImageButton btn_date_event, btn_time_event;
+    ImageButton btn_date_event, btn_time_event, btn_lokasi_event;
     Button btn_set_new_event;
     TextView tv_date_event, tv_time_event, tv_alamat_event;
 
@@ -64,6 +66,17 @@ public class NewEventActivity extends AppCompatActivity implements View.OnClickL
         btn_time_event.setOnClickListener(this);
         btn_set_new_event.setOnClickListener(this);
 
+        btn_lokasi_event = findViewById(R.id.btn_lokasi_event);
+        btn_lokasi_event.setOnClickListener(this);
+
+        if (getIntent().getExtras() != null) {
+//            edt_nama_event.setText(getIntent().getStringExtra("nama"));
+//            edt_deskripsi_event.setText(getIntent().getStringExtra("deskripsi"));
+//            tv_date_event.setText(getIntent().getStringExtra("date"));
+//            tv_time_event.setText(getIntent().getStringExtra("time"));
+
+            tv_alamat_event.setText(getIntent().getStringExtra("lokasi"));
+        }
     }
 
 
@@ -82,6 +95,12 @@ public class NewEventActivity extends AppCompatActivity implements View.OnClickL
                 break;
             //Button untuk memanggil lokasi event
             case R.id.btn_lokasi_event:
+                Intent intentToLokasi = new Intent(NewEventActivity.this, MapsActivity.class);
+//                intentToLokasi.putExtra("nama", edt_nama_event.getText().toString());
+//                intentToLokasi.putExtra("deskripsi", edt_deskripsi_event.getText().toString());
+//                intentToLokasi.putExtra("date", tv_date_event.getText().toString());
+//                intentToLokasi.putExtra("time", tv_time_event.getText().toString());
+                startActivity(intentToLokasi);
                 break;
             //Button untuk set event baru
             case R.id.btn_set_new_event:
@@ -89,24 +108,27 @@ public class NewEventActivity extends AppCompatActivity implements View.OnClickL
                 namaEvent = edt_nama_event.getText().toString();
                 deskripsiEvent = edt_deskripsi_event.getText().toString();
 
-                createEvent(namaEvent,tanggalEvent,alamatEvent,jamEvent,deskripsiEvent);
+                //Alamat Event to Firebase
+                alamatEvent = tv_alamat_event.getText().toString();
+
+                createEvent(namaEvent, tanggalEvent, alamatEvent, jamEvent, deskripsiEvent);
                 break;
         }
     }
 
     //method for create event and add to firebase
-    private void createEvent(String namaEvent, String tanggalEvent, String alamatEvent, String jamEvent, String deskripsiEvent){
+    private void createEvent(String namaEvent, String tanggalEvent, String alamatEvent, String jamEvent, String deskripsiEvent) {
         String eventId = database.push().getKey().toString();
-        Event event = new Event(eventId,namaEvent,tanggalEvent,alamatEvent,jamEvent,deskripsiEvent);
+        Event event = new Event(eventId, namaEvent, tanggalEvent, alamatEvent, jamEvent, deskripsiEvent);
 
         database.child(eventId).setValue(event).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    Log.d("Event","Successfulyy created");
-                    Toast.makeText(getApplicationContext(),"event created",Toast.LENGTH_SHORT).show();
-                }else{
-                    Log.d("Event",task.getException().toString());
+                if (task.isSuccessful()) {
+                    Log.d("Event", "Successfulyy created");
+                    Toast.makeText(getApplicationContext(), "event created", Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.d("Event", task.getException().toString());
                 }
             }
         });
