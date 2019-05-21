@@ -25,7 +25,7 @@
         android:layout_marginTop="8dp"
         android:textColor="@android:color/white"
         android:textStyle="bold"
-        android:background="@color/colorBtn"
+        android:background="@color/colorApp"
         android:text="submit lokasi"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

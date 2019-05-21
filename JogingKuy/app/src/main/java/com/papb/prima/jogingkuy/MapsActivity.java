@@ -38,6 +38,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     Geocoder geocoder;
 
+    String edt_nama_event = "", edt_deskripsi_event = "", tv_date_event = "", tv_time_event = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +52,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         geocoder = new Geocoder(this, Locale.getDefault());
 
-        txt_lokasi= findViewById(R.id.txt_lokasi);
+        txt_lokasi = findViewById(R.id.txt_lokasi);
         btn_submit_lokasi = findViewById(R.id.btn_submit_lokasi);
+
+        //Terima intent dari class NewEventActivity
+        edt_nama_event = getIntent().getStringExtra("nama");
+        edt_deskripsi_event = getIntent().getStringExtra("deskripsi");
+        tv_date_event = getIntent().getStringExtra("date");
+        tv_time_event = getIntent().getStringExtra("time");
     }
 
     /**
@@ -109,8 +117,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             btn_submit_lokasi.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intentLokasi = new Intent(MapsActivity.this, SampleMapActivity.class);
+                    Intent intentLokasi = new Intent(MapsActivity.this, NewEventActivity.class);
                     intentLokasi.putExtra("lokasi", address);
+
+                    intentLokasi.putExtra("nama", edt_nama_event);
+                    intentLokasi.putExtra("deskripsi", edt_deskripsi_event);
+                    intentLokasi.putExtra("date", tv_date_event);
+                    intentLokasi.putExtra("time", tv_time_event);
                     startActivity(intentLokasi);
                 }
             });

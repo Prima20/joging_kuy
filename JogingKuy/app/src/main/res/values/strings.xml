@@ -1,3 +1,31 @@
 <resources>
     <string name="app_name">Joging Kuy</string>
+    <string name="error_taking_picture">Error taking picture</string>
+    <string name="permission_message">I need permission to take pictures :(</string>
+    <string name="picture_not_taken">Picture Not Taken!</string>
+    <string name="dashboard_home">Home</string>
+    <string name="dashboard_create_event">Create event</string>
+    <string name="dashboard_my_event">Home</string>
+    <string name="dashboard_profile">Profile</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_dashboard">DashboardActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_new_event">New Event</string>
+    <string name="title_my_event">My Event</string>
+    <string name="title_profile">Profile</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="join">JOIN</string>
+    <string name="alamat">Alamat</string>
+    <string name="lokasi">Lokasi</string>
+    <string name="deskripsi">Deskripsi</string>
+    <string name="diselenggarakan_oleh">Diselenggarakan oleh</string>
+    <string name="todo">TODO</string>
+    <string name="alamat_event">Alamat Event</string>
+    <string name="nama_event">Nama Event</string>
+    <string name="lokasi_event">Lokasi Event</string>
 </resources>
