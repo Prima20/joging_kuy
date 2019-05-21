@@ -109,7 +109,7 @@ public class NewEventActivity extends AppCompatActivity implements View.OnClickL
                 deskripsiEvent = edt_deskripsi_event.getText().toString();
 
                 //Alamat Event to Firebase
-                alamatEvent = tv_alamat_event.getText().toString();
+//                alamatEvent = tv_alamat_event.getText().toString();
 
                 createEvent(namaEvent, tanggalEvent, alamatEvent, jamEvent, deskripsiEvent);
                 break;
