@@ -65,7 +65,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int weight = dataSnapshot.getValue(Integer.class);
-                tv_weight.setText(String.valueOf(weight));
+                tv_weight.setText(String.valueOf(weight) + " kg");
             }
 
             @Override
@@ -80,7 +80,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int height = dataSnapshot.getValue(Integer.class);
-                tv_height.setText(String.valueOf(height));
+                tv_height.setText(String.valueOf(height) + " cm");
             }
 
             @Override
