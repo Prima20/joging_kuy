@@ -74,6 +74,11 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        super.moveTaskToBack(true);
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return super.onCreateOptionsMenu(menu);
