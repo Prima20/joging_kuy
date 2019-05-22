@@ -62,7 +62,7 @@ public class DetailEventActivity extends AppCompatActivity {
         txt_date = findViewById(R.id.txt_date);
         txt_time = findViewById(R.id.txt_time);
         txt_alamat_received = findViewById(R.id.txt_alamat_received);
-        txt_lokasi_received = findViewById(R.id.txt_lokasi_received);
+//        txt_lokasi_received = findViewById(R.id.txt_lokasi_received);
         txt_deskripsi = findViewById(R.id.txt_deskripsi_received);
         btn_join_event = findViewById(R.id.btn_join_event);
 

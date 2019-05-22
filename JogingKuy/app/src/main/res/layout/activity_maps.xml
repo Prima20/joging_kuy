@@ -56,7 +56,7 @@
         android:layout_height="60dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        app:srcCompat="@drawable/ic_pin_drop_black_24dp"
+        android:src="@drawable/baseline_pin_drop_black_18dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_submit_lokasi"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/map"

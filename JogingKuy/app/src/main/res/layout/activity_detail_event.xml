@@ -111,31 +111,6 @@
             tools:text="Alamat" />
 
         <TextView
-            android:id="@+id/txt_lokasi"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:text="@string/lokasi"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/txt_lokasi_received"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:textSize="16sp"
-            tools:text="Lokasi" />
-
-        <TextView
             android:id="@+id/txt_deskripsi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -188,7 +163,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
-                tools:src="@drawable/ic_android_black_24dp" />
+                android:background="@drawable/baseline_person_black_18dp" />
 
             <TextView
                 android:id="@+id/txt_penyelenggara_received"
@@ -198,7 +173,7 @@
                 android:layout_toEndOf="@id/profile_image"
                 android:layout_toRightOf="@id/profile_image"
                 android:textColor="@android:color/black"
-                tools:text="Penyelenggara" />
+                android:text="Penyelenggara" />
         </RelativeLayout>
 
         <LinearLayout
