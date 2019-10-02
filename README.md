@@ -2,6 +2,10 @@
 
 Aplikasi untuk membantu proses jogging
 
-Programmer
+Created by :
+
 Primananda Kurnia Santoso
 Alva Yonara Putra
+Muhammad Yasir Anshari Haq
+Shena Stars Sarwodi
+Ori Abrori
