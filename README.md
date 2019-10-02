@@ -1,3 +1,7 @@
 # joging_kuy
 
-Aplikasi untuk joging kuy
+Aplikasi untuk membantu proses jogging
+
+Programmer
+Primananda Kurnia Santoso
+Alva Yonara Putra
